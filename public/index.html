@@ -10,8 +10,28 @@
 </head>
 <body>
     <div ng-controller='MainController'>
-        <h1>My Awesome App</h1>
+        <h1>Ok My Awesome App</h1>
         <p>{{message}}</p>
+        <select name="repeatSelect"
+                id="repeatSelect"
+                ng-model="model.selectedProfession"
+                ng-change="update();"
+                >
+            <option ng-repeat="option in model.professions" value="{{option}}">{{option}}</option>
+        </select>
+        <p>test {{filteredData.length}}</p>
+        <ul>
+            <li ng-repeat="person in filteredData track by $index">
+                <span>{{person.first_name}} {{person.last_name}}</span>
+                <br>
+                <span>Email: {{person.email}}</span>
+                <br>
+                <span>Gender {{person.gender}}</span>
+                <br>
+                <span>Profession {{person.job_title}}</span>
+                <hr>
+            </li>
+        </ul>
     </div>
 </body>
 </html>

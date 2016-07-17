@@ -11,4 +11,18 @@ Also, I found a good way to generate random data - [mockaroo](https://www.mockar
 
 I'll use Angular 1.5
 
-Following the setup notes for [Angular Structure](https://omarfouad.com)
+Following the setup notes using Brofor [Angular Structure](https://omarfouad.com)
+
+
+## Project structure
+
+Ideally I would like to create a Component Structure, unfortunately setting up the browserify dependencies was a distraction, and I'm currently adding the underscore library directly into the html page and using the global _ property in the Window object.
+
+
+## Links
+
+[reating-and-extending-a-lodash-underscore-service-in-angularjs](http://www.bennadel.com/blog/2720-creating-and-extending-a-lodash-underscore-service-in-angularjs.htm) - Could use this method
+[writing-browserify-modules-for-your-angular-app](http://mindthecode.com/writing-browserify-modules-for-your-angular-app/)
+[building-angular-with-browserify/](http://nicholasjohnson.com/blog/building-angular-with-browserify/)
+
+

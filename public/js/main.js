@@ -1,13 +1,36 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-require('angular')
-var MainController = require('./controllers/MainController')
+require('angular');
 
-var app = angular.module('app', [])
-app.controller('MainController', ['$scope', MainController])
+
+var app = angular.module('myApp', []);
+
+
+var MainController = require('./controllers/MainController');
+
+app.controller('MainController', ['$scope','$window', MainController]);
+
+
+// TODO break out into modules once that is worked out...
+//require('./app.module');
+//var PeopleComponent = require('./people/People');
+//app.component('PeopleComponent', ['$scope', PeopleComponent]);
 },{"./controllers/MainController":2,"angular":4}],2:[function(require,module,exports){
-module.exports = function($scope) {
-	$scope.message = 'Two three killed with one stone!'
-}
+module.exports = function($scope, $window) {
+    $scope.message = 'Setting Up';
+
+    console.log('A Main - this logs! window ', $window._);
+
+    // for the time being use set up the underscore dependency so
+    var _ = $window._;
+
+    var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+    $scope.names = _.pluck(stooges, 'name');
+
+    // Ok This is working
+    console.log('stooges ', stooges);
+};
+
+
 },{}],3:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.7

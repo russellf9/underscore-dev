@@ -5,6 +5,7 @@ var app = angular.module('myApp', []);
 
 
 var MainController = require('./controllers/MainController');
+var peopleData = require('./people'); // put here
 
 app.controller('MainController', ['$scope','$window', MainController]);
 

@@ -1,8 +1,6 @@
 module.exports = function($scope, $window) {
     $scope.message = 'Setting Up';
 
-    console.log('A Main - this logs! window ', $window._);
-
     // for the time being use set up the underscore dependency so
     var _ = $window._;
 
@@ -10,6 +8,13 @@ module.exports = function($scope, $window) {
     $scope.names = _.pluck(stooges, 'name');
 
     // Ok This is working
-    console.log('stooges ', stooges);
+   // console.log('2 stooges ', stooges);
+
+    var peopleData = require('.././people'); // hack like this for the time being
+
+    console.log('peopleData ', peopleData);
+
+
+
 };
 

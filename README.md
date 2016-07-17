@@ -21,8 +21,8 @@ Ideally I would like to create a Component Structure, unfortunately setting up t
 
 ## Links
 
-[reating-and-extending-a-lodash-underscore-service-in-angularjs](http://www.bennadel.com/blog/2720-creating-and-extending-a-lodash-underscore-service-in-angularjs.htm) - Could use this method
-[writing-browserify-modules-for-your-angular-app](http://mindthecode.com/writing-browserify-modules-for-your-angular-app/)
-[building-angular-with-browserify/](http://nicholasjohnson.com/blog/building-angular-with-browserify/)
+* [reating-and-extending-a-lodash-underscore-service-in-angularjs](http://www.bennadel.com/blog/2720-creating-and-extending-a-lodash-underscore-service-in-angularjs.htm) - Could use this method
+* [writing-browserify-modules-for-your-angular-app](http://mindthecode.com/writing-browserify-modules-for-your-angular-app/)
+* [building-angular-with-browserify/](http://nicholasjohnson.com/blog/building-angular-with-browserify/)
 
 

@@ -9,3 +9,6 @@ Ideally I will progress to Lo-dash but for the time-being I am following example
 Also, I found a good way to generate random data - [mockaroo](https://www.mockaroo.com).
 
 
+I'll use Angular 1.5
+
+Following the setup notes for [Angular Structure](https://omarfouad.com)

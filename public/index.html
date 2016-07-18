@@ -9,38 +9,49 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div ng-controller='MainController'>
-        <h1>Ok My Awesome App</h1>
-        <p>{{message}}</p>
-        <!-- PROFESSION SELECTION -->
+<div ng-controller='MainController'>
+    <h1>Ok My Awesome App</h1>
+
+    <p>{{message}}</p>
+    <!-- PROFESSION SELECTION -->
+    <div>
         <select name="repeatSelect"
                 id="repeatSelect"
                 ng-model="model.selectedProfession"
-                ng-change="update();"
-                >
+                ng-change="update();">
             <option ng-repeat="option in model.professions" value="{{option}}">{{option}}</option>
         </select>
+
         <!-- GENDER SELECTION -->
         <select name="genderSelect"
                 id="genderSelect"
                 ng-model="model.selectedGender"
-                ng-change="update();"
-        >
+                ng-change="update();">
             <option ng-repeat="option in model.genders" value="{{option}}">{{option}}</option>
-        </select>
-        <p>test {{filteredData.length}}</p>
-        <ul>
-            <li ng-repeat="person in filteredData track by $index">
-                <span>{{person.first_name}} {{person.last_name}}</span>
-                <br>
-                <span>Email: {{person.email}}</span>
-                <br>
-                <span>Gender {{person.gender}}</span>
-                <br>
-                <span>Profession {{person.job_title}}</span>
-                <hr>
-            </li>
-        </ul>
+        </select></div>
+
+    <!-- SEARCH -->
+    <div>
+        <input type="search"
+               name="search"
+               ng-change="update()"
+               ng-model="model.search"
+               ng-trim="true"/>
     </div>
+
+    <p>test {{filteredData.length}}</p>
+    <ul>
+        <li ng-repeat="person in filteredData track by $index">
+            <span>{{person.first_name}} {{person.last_name}}</span>
+            <br>
+            <span>Email: {{person.email}}</span>
+            <br>
+            <span>Gender {{person.gender}}</span>
+            <br>
+            <span>Profession {{person.job_title}}</span>
+            <hr>
+        </li>
+    </ul>
+</div>
 </body>
 </html>

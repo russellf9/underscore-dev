@@ -33,18 +33,37 @@ module.exports = function($scope, $window) {
     console.log('peopleData ', $scope.peopleData);
 
 
-
     $scope.model = {};
 
 
     //==== Scope functions ====
 
     $scope.update = function() {
-        $scope.filteredData = _getPeopleGroupedByProfession($scope.model.selectedProfession);
+
+        var peopleFilteredByProfession = _getPeopleGroupedByProfession($scope.model.selectedProfession);
+
+        var peopleFilteredByGender = _getPeopleFilteredByGender($scope.model.selectedGender);
+
+        $scope.filteredData = _.intersection(peopleFilteredByProfession,peopleFilteredByGender);
     };
 
-    // utility functions
+    //==== UTILITY FUNCTIONS ====
 
+    // GENDER
+    function _filterByGender(people, gender) {
+        if (!gender || gender === 'Any') {
+            return people;
+        }
+        return _.where(people, {
+            gender: gender
+        });
+    }
+    function _getPeopleFilteredByGender(gender) {
+        return _filterByGender($scope.peopleData, gender);
+    }
+
+
+    // PROFESSION
     function _filterPeopleByProfession(people, profession) {
         if (!profession || profession === 'All') {
             return people;
@@ -53,14 +72,13 @@ module.exports = function($scope, $window) {
             job_title: profession
         });
     }
-
     function _getPeopleGroupedByProfession(profession) {
         var filteredPeople = _filterPeopleByProfession($scope.peopleData, profession);
 
-        return filteredPeople;
+        return _.sortBy(filteredPeople, 'last_name');
     }
 
-    // Create a fill list of possible drop down options by `plucking` all possible va;ues
+    // Create a fill list of possible drop down options by `plucking` all possible values
     $scope.model.professions = _.uniq(_.pluck(_.flatten($scope.peopleData), "job_title"));
 
     // Create and set the default option
@@ -69,7 +87,16 @@ module.exports = function($scope, $window) {
     $scope.model.selectedProfession =  $scope.model.professions[0];
 
 
-    // Mke the iniitial call to set the View data
+    // Create a list of possible gender dropdowns by `plucking` all possible values
+    $scope.model.genders = _.uniq(_.pluck(_.flatten($scope.peopleData), "gender"));
+
+    // Create and set the default option
+    $scope.model.genders.unshift('Any');
+
+    $scope.model.selectedGender =  $scope.model.genders[0];
+
+
+    // Mke the initial call to set the View data
     $scope.update();
 
 };
@@ -288,7 +315,7 @@ module.exports=[{"id":1,"first_name":"Joseph","last_name":"Cruz","email":"jcruz0
   {"id":210,"first_name":"Daniel","last_name":"Matthews","email":"dmatthews5t@timesonline.co.uk","gender":"Male","job_title":"Programmer"},
   {"id":211,"first_name":"Fred","last_name":"Garza","email":"fgarza5u@cdbaby.com","gender":"Male","job_title":"Editor"},
   {"id":212,"first_name":"Timothy","last_name":"Hanson","email":"thanson5v@oracle.com","gender":"Male","job_title":"Senior Editor"},
-  {"id":213,"first_name":"Jason","last_name":"Carr","email":"jcarr5w@abc.net.au","gender":"Male","job_title":"AccountantI"},
+  {"id":213,"first_name":"Jason","last_name":"Carr","email":"jcarr5w@abc.net.au","gender":"Male","job_title":"Accountant"},
   {"id":214,"first_name":"Beverly","last_name":"Willis","email":"bwillis5x@usnews.com","gender":"Female","job_title":"Graphic Designer"},
   {"id":215,"first_name":"Philip","last_name":"Fowler","email":"pfowler5y@addthis.com","gender":"Male","job_title":"Programmer"},
   {"id":216,"first_name":"Raymond","last_name":"Lane","email":"rlane5z@smh.com.au","gender":"Male","job_title":"Senior Programmer"},
@@ -313,7 +340,7 @@ module.exports=[{"id":1,"first_name":"Joseph","last_name":"Cruz","email":"jcruz0
   {"id":235,"first_name":"Sandra","last_name":"Dean","email":"sdean6i@bing.com","gender":"Female","job_title":"Web Developer"},
   {"id":236,"first_name":"Adam","last_name":"Gray","email":"agray6j@imdb.com","gender":"Male","job_title":"Database Administrator"},
   {"id":237,"first_name":"Joe","last_name":"Lewis","email":"jlewis6k@economist.com","gender":"Male","job_title":"Graphic Designer"},
-  {"id":238,"first_name":"Matthew","last_name":"Sullivan","email":"msullivan6l@csmonitor.com","gender":"Male","job_title":"AccountantV"},
+  {"id":238,"first_name":"Matthew","last_name":"Sullivan","email":"msullivan6l@csmonitor.com","gender":"Male","job_title":"Accountant"},
   {"id":239,"first_name":"Pamela","last_name":"Webb","email":"pwebb6m@ocn.ne.jp","gender":"Female","job_title":"Database Administrator"},
   {"id":240,"first_name":"Louis","last_name":"Matthews","email":"lmatthews6n@stanford.edu","gender":"Male","job_title":"Programmer"},
   {"id":241,"first_name":"Clarence","last_name":"Morgan","email":"cmorgan6o@friendfeed.com","gender":"Male","job_title":"Programmer"},
@@ -345,7 +372,7 @@ module.exports=[{"id":1,"first_name":"Joseph","last_name":"Cruz","email":"jcruz0
   {"id":267,"first_name":"Sarah","last_name":"Perkins","email":"sperkins7e@mlb.com","gender":"Female","job_title":"Programmer"},
   {"id":268,"first_name":"Laura","last_name":"Green","email":"lgreen7f@altervista.org","gender":"Female","job_title":"Graphic Designer"},
   {"id":269,"first_name":"Kathy","last_name":"Cruz","email":"kcruz7g@netvibes.com","gender":"Female","job_title":"Web Designer"},
-  {"id":270,"first_name":"Antonio","last_name":"Gray","email":"agray7h@wikipedia.org","gender":"Male","job_title":"AccountantV"},
+  {"id":270,"first_name":"Antonio","last_name":"Gray","email":"agray7h@wikipedia.org","gender":"Male","job_title":"Accountant"},
   {"id":271,"first_name":"Christopher","last_name":"Medina","email":"cmedina7i@time.com","gender":"Male","job_title":"Electrical Engineer"},
   {"id":272,"first_name":"Kenneth","last_name":"Hunt","email":"khunt7j@wunderground.com","gender":"Male","job_title":"Programmer"},
   {"id":273,"first_name":"Carolyn","last_name":"Montgomery","email":"cmontgomery7k@drupal.org","gender":"Female","job_title":"Graphic Designer"},

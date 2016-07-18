@@ -12,12 +12,21 @@
     <div ng-controller='MainController'>
         <h1>Ok My Awesome App</h1>
         <p>{{message}}</p>
+        <!-- PROFESSION SELECTION -->
         <select name="repeatSelect"
                 id="repeatSelect"
                 ng-model="model.selectedProfession"
                 ng-change="update();"
                 >
             <option ng-repeat="option in model.professions" value="{{option}}">{{option}}</option>
+        </select>
+        <!-- GENDER SELECTION -->
+        <select name="genderSelect"
+                id="genderSelect"
+                ng-model="model.selectedGender"
+                ng-change="update();"
+        >
+            <option ng-repeat="option in model.genders" value="{{option}}">{{option}}</option>
         </select>
         <p>test {{filteredData.length}}</p>
         <ul>

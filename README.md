@@ -21,6 +21,24 @@ Following the setup notes using Brofor [Angular Structure](https://omarfouad.com
 Ideally I would like to create a Component Structure, unfortunately setting up the browserify dependencies was a distraction, and I'm currently adding the underscore library directly into the html page and using the global _ property in the Window object.
 
 
+## Installation
+
+```
+git clone https://github.com/russellf9/underscore-dev.git
+cd underscore-dev
+npm update
+```
+
+## Run
+```
+gulp
+```
+
+Then open app in http://localhost:4000/
+
+
+
+
 ## Links
 
 * [reating-and-extending-a-lodash-underscore-service-in-angularjs](http://www.bennadel.com/blog/2720-creating-and-extending-a-lodash-underscore-service-in-angularjs.htm) - Could use this method

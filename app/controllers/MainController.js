@@ -15,18 +15,37 @@ module.exports = function($scope, $window) {
     console.log('peopleData ', $scope.peopleData);
 
 
-
     $scope.model = {};
 
 
     //==== Scope functions ====
 
     $scope.update = function() {
-        $scope.filteredData = _getPeopleGroupedByProfession($scope.model.selectedProfession);
+
+        var peopleFilteredByProfession = _getPeopleGroupedByProfession($scope.model.selectedProfession);
+
+        var peopleFilteredByGender = _getPeopleFilteredByGender($scope.model.selectedGender);
+
+        $scope.filteredData = _.intersection(peopleFilteredByProfession,peopleFilteredByGender);
     };
 
-    // utility functions
+    //==== UTILITY FUNCTIONS ====
 
+    // GENDER
+    function _filterByGender(people, gender) {
+        if (!gender || gender === 'Any') {
+            return people;
+        }
+        return _.where(people, {
+            gender: gender
+        });
+    }
+    function _getPeopleFilteredByGender(gender) {
+        return _filterByGender($scope.peopleData, gender);
+    }
+
+
+    // PROFESSION
     function _filterPeopleByProfession(people, profession) {
         if (!profession || profession === 'All') {
             return people;
@@ -35,14 +54,13 @@ module.exports = function($scope, $window) {
             job_title: profession
         });
     }
-
     function _getPeopleGroupedByProfession(profession) {
         var filteredPeople = _filterPeopleByProfession($scope.peopleData, profession);
 
-        return filteredPeople;
+        return _.sortBy(filteredPeople, 'last_name');
     }
 
-    // Create a fill list of possible drop down options by `plucking` all possible va;ues
+    // Create a fill list of possible drop down options by `plucking` all possible values
     $scope.model.professions = _.uniq(_.pluck(_.flatten($scope.peopleData), "job_title"));
 
     // Create and set the default option
@@ -51,7 +69,16 @@ module.exports = function($scope, $window) {
     $scope.model.selectedProfession =  $scope.model.professions[0];
 
 
-    // Mke the iniitial call to set the View data
+    // Create a list of possible gender dropdowns by `plucking` all possible values
+    $scope.model.genders = _.uniq(_.pluck(_.flatten($scope.peopleData), "gender"));
+
+    // Create and set the default option
+    $scope.model.genders.unshift('Any');
+
+    $scope.model.selectedGender =  $scope.model.genders[0];
+
+
+    // Mke the initial call to set the View data
     $scope.update();
 
 };

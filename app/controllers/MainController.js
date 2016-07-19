@@ -20,6 +20,21 @@ module.exports = function($scope, $window) {
 
     //==== Scope functions ====
 
+    // uses a search string to filter
+    $scope.updateSearch = function() {
+        // by id
+        // model.searchId
+
+        // clear the collection first
+        $scope.filteredData = []
+
+        var hasPeople =  _hasPeopleById($scope.model.searchId);
+
+        if (hasPeople) {
+            $scope.filteredData.push(_findPeopleById($scope.model.searchId))
+        }
+    };
+
     $scope.update = function() {
 
         var peopleFilteredByProfession = _getPeopleGroupedByProfession($scope.model.selectedProfession);
@@ -27,9 +42,30 @@ module.exports = function($scope, $window) {
         var peopleFilteredByGender = _getPeopleFilteredByGender($scope.model.selectedGender);
 
         $scope.filteredData = _.intersection(peopleFilteredByProfession,peopleFilteredByGender);
+
+
     };
 
     //==== UTILITY FUNCTIONS ====
+
+    // ALL PEOPLE
+    function getPeople() {
+        return $scope.peopleData;
+    }
+
+    // ID
+    function _hasPeopleById(id) {
+        var people = getPeople();
+        var peopleIds = _.pluck(people, 'id');
+        return _.contains(peopleIds, Number(id)); // Note: Had to to do type cast
+    }
+
+    function _findPeopleById(id) {
+        var people = getPeople();
+        return _.find(people, function(person) {
+            return Number(person.id) === Number(id);
+        });
+    }
 
     // GENDER
     function _filterByGender(people, gender) {

@@ -14,7 +14,7 @@
 
     <p>{{message}}</p>
     <!-- PROFESSION SELECTION -->
-    <div>
+    <div class="search-item">
         <select name="repeatSelect"
                 id="repeatSelect"
                 ng-model="model.selectedProfession"
@@ -31,11 +31,12 @@
         </select></div>
 
     <!-- SEARCH -->
-    <div>
+    <div class="search-item">
+        <label>Search by id</label>
         <input type="search"
                name="search"
-               ng-change="update()"
-               ng-model="model.search"
+               ng-change="updateSearch()"
+               ng-model="model.searchId"
                ng-trim="true"/>
     </div>
 
@@ -52,6 +53,8 @@
             <hr>
         </li>
     </ul>
+
+    <p>{{filteredData}}</p>
 </div>
 </body>
 </html>
